@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/cific
+cific.so
+cific.dylib
+cific.dll
+cific.a
+cific.lib
+cific-test-*
+*.exe
+*.o
+*.obj
+*.lst
