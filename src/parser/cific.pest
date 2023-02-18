@@ -1,0 +1,5 @@
+COMMENT = _{ "/*" ~ (!"*/" ~ ANY)* ~ "*/"}
+WHITESPACE = _{ " " | "　" | "\r" | "\n" }
+
+ident = @{ (ASCII_ALPHA | "_") ~ (ASCII_ALPHANUMERIC | "_")* }
+ident_path = { ident ~ ("::" ~ ident)* }
