@@ -1,13 +1,18 @@
 COMMENT = _{ "/*" ~ (!"*/" ~ ANY)* ~ "*/"}
 IDENT_CHAR = @{ ASCII_ALPHA | "_" | HAN | HANGUL | HIRAGANA | KATAKANA }
-WHITESPACE = _{ " " | "　" | "\r" | "\n" }
+LINE_COMMENT = _{ "//" ~ (!"\n" ~ ANY)* ~ "\n" }
+WHITESPACE = _{ " " | "\n" }
 
 // Keywords.
-func = @{ "func" | "函数" | "函數" }
+FUNC = @{ "func" | "函数" | "函數" }
+STRUCT = @{ "struct" | "结构" | "結構"}
+VAR = @{ "var" | "变量" | "變量" }
 
 bin_int_literal = @{ ("0b" | "0B") ~ ASCII_BIN_DIGIT+ }
 dec_int_literal = @{ "0" | (ASCII_NONZERO_DIGIT ~ ASCII_DIGIT*) }
 oct_int_literal = @{ ("0o" | "0O") ~ ASCII_OCT_DIGIT+ }
 
+type_specifier = { ident_path }
 ident = @{ IDENT_CHAR ~ (IDENT_CHAR | ASCII_DIGIT)* }
 ident_path = { ident ~ ("::" ~ ident)* }
+var_declaration = { VAR ~ WHITESPACE ~ ident ~ ";"}
