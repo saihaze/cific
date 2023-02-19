@@ -1,5 +1,13 @@
 COMMENT = _{ "/*" ~ (!"*/" ~ ANY)* ~ "*/"}
+IDENT_CHAR = @{ ASCII_ALPHA | "_" | HAN | HANGUL | HIRAGANA | KATAKANA }
 WHITESPACE = _{ " " | "　" | "\r" | "\n" }
 
-ident = @{ (ASCII_ALPHA | "_") ~ (ASCII_ALPHANUMERIC | "_")* }
+// Keywords.
+func = @{ "func" | "函数" | "函數" }
+
+bin_int_literal = @{ ("0b" | "0B") ~ ASCII_BIN_DIGIT+ }
+dec_int_literal = @{ "0" | (ASCII_NONZERO_DIGIT ~ ASCII_DIGIT*) }
+oct_int_literal = @{ ("0o" | "0O") ~ ASCII_OCT_DIGIT+ }
+
+ident = @{ IDENT_CHAR ~ (IDENT_CHAR | ASCII_DIGIT)* }
 ident_path = { ident ~ ("::" ~ ident)* }
